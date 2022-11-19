@@ -8,9 +8,11 @@ import { Autoplay, EffectCreative, Keyboard } from "swiper"
 import 'swiper/css';
 import 'swiper/css/bundle'
 import './GameDetails.css'
+import Notfound from '../Notfound/Notfound';
 
 export default function GameDetails() {
   const [gameDetails, setGameDetails] = useState([]);
+  const [idError, setIdError] = useState('');
   let { id } = useParams();
   async function getGames() {
     let { data } = await axios.get(`https://free-to-play-games-database.p.rapidapi.com/api/game`, {
@@ -19,14 +21,17 @@ export default function GameDetails() {
         'X-RapidAPI-Key': 'fc42eedff7msh1176cf883aee197p199b36jsn12e2a3062d67',
         'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
       }
-    })
+    }).catch(error=>
+        {
+          setIdError(error.response.status)
+        })
     setGameDetails(data)
   }
   useEffect(() => {
     getGames()
   }, [])
   return <>
-    {gameDetails.length !== 0 ? <div className="container">
+    {idError === 404 ? <Notfound />:gameDetails.length !== 0 ?<div className="container">
       <div className="row">
         <div className="col-md-5 col-lg-4">
           <div className="game-detail-cover">
@@ -112,7 +117,6 @@ export default function GameDetails() {
 
         </div>
       </div>
-    </div> : <Loading />}
-
+    </div> :<Loading />}
   </>
 }
