@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import {createHashRouter, Navigate, RouterProvider } from 'react-router-dom'
 import Home from '../Home/Home'
 import Main from '../Main/Main'
 import Login from '../Login/Login'
@@ -52,7 +52,7 @@ export default function App() {
     return <Navigate to='/login' />
   }
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: '', element: <Main userData={userData} logOut={logOut} />, children: [
         { path: '', element: <ProtectedRoute userData={userData} saveUserData={saveUserData}><Home /></ProtectedRoute> },
