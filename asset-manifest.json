@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/gameover/static/css/main.c7facb25.css",
+    "main.js": "/gameover/static/js/main.1c4495ae.js",
+    "static/media/fa-solid-900.ttf": "/gameover/static/media/fa-solid-900.b48ad290d0335879a92b.ttf",
+    "static/media/paladins.png": "/gameover/static/media/paladins.b44d33d6e7ee1ba8.0fddd1fbe0a5e0a0af93.png",
+    "static/media/register-login-banner.jpg": "/gameover/static/media/register-login-banner.d5751ff804c935b205d3.jpg",
+    "static/media/fa-brands-400.ttf": "/gameover/static/media/fa-brands-400.f9ee61fab3c11e2f3ed3.ttf",
+    "static/media/logo.png": "/gameover/static/media/logo.548dc5719c2345c22eef.png",
+    "static/media/fa-solid-900.woff2": "/gameover/static/media/fa-solid-900.66104b766c3d0462b3c5.woff2",
+    "static/media/fa-brands-400.woff2": "/gameover/static/media/fa-brands-400.e1a247a5ef41e1975742.woff2",
+    "static/media/fa-regular-400.ttf": "/gameover/static/media/fa-regular-400.abf801b7acb6705a15ad.ttf",
+    "static/media/fa-regular-400.woff2": "/gameover/static/media/fa-regular-400.639d2000c1ece92eaec8.woff2",
+    "static/media/fa-v4compatibility.ttf": "/gameover/static/media/fa-v4compatibility.f601162ae669f88823a3.ttf",
+    "static/media/fa-v4compatibility.woff2": "/gameover/static/media/fa-v4compatibility.745989aab0d69cab7e70.woff2",
+    "index.html": "/gameover/index.html",
+    "main.c7facb25.css.map": "/gameover/static/css/main.c7facb25.css.map",
+    "main.1c4495ae.js.map": "/gameover/static/js/main.1c4495ae.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c7facb25.css",
+    "static/js/main.1c4495ae.js"
+  ]
+}
