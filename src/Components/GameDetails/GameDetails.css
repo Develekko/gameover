@@ -1,0 +1,16 @@
+.game-detail-cover button
+{
+    background-color: #4799EB;
+}
+.game-detail-cover button:hover
+{
+    color: #4799EB!important;
+    border-color: #4799EB;
+}
+.game-detail-cover .free
+{
+    background-color: #32383E;
+}
+.game-add-info p{
+    color: rgb(170, 170, 170)
+}
