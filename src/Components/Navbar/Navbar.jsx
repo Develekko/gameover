@@ -35,7 +35,6 @@ export default function Navbar({ userData, logOut }) {
                   <li><Link className="dropdown-item" to="/sort-by/popularity">Popularity</Link></li>
                   <li><Link className="dropdown-item" to="/sort-by/alphabetical">Alphabetical</Link></li>
                   <li><Link className="dropdown-item" to="/sort-by/relevance">Relevance</Link></li>
-                  <li></li>
                 </ul>
               </li><li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

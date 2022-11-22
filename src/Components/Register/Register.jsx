@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import $ from 'jquery'
 
 export default function Register() {
-
     const navigate = useNavigate()
     const [user, setUser] = useState({
         first_name: '',
@@ -61,7 +60,7 @@ export default function Register() {
                 <span></span>
                 <span></span>
                 <span></span>
-                
+                {apiMessage}
             </div>
         </div> : null}
         <div className="container">
@@ -91,7 +90,7 @@ export default function Register() {
                             </div>
                             <div className="mb-4">
                                 <input onChange={getUSerData} name='password' id='password' type="text" placeholder='Password' className='form-control' />
-                                <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'password')[0]?'Invalid Password : must be at least 8 characters':null}</small>
+                                <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'password')[0] ? 'Invalid Password : must be at least 8 characters' : null}</small>
                             </div>
                             <button className='btn text-white p-2 w-100'>{isLoading ? <i className='fas fa-spinner fa-spin'></i> : 'Create Account'}</button>
                         </form>
