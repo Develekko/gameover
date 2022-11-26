@@ -33,7 +33,7 @@ export default function Home() {
       <div className="text-center Home">
         <h1 className='text-white-50'>Find & track the best <span>free-to-play</span> games!</h1>
         <p className='text-muted'>Track what you've played and search for what to play next! Plus get free premium loot!</p>
-        <Link to={'./all-games'}><button className='btn btn-outline-secondary'>Browse Games</button></Link>
+        <Link to={'/all/games'}><button className='btn btn-outline-secondary'>Browse Games</button></Link>
       </div>
     </main>
 

@@ -18,6 +18,9 @@ let gameSlice =  createSlice({
     extraReducers:(builder)=>{
         builder.addCase(getGames.fulfilled,(state,action)=>{
             state.allgames = action.payload
+        });
+        builder.addCase(getGames.pending,(state)=>{
+            state.loading = true
         })
     }
 
