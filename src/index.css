@@ -22,8 +22,8 @@ a {
 }
 input {
   background-color: #1c1e22 !important;
-  color: var(--main-color) !important;
-  border-color: var(--border-color) !important;
+  color: #fff !important;
+  border-color: rgba(0, 0, 0, 0.6)!important;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

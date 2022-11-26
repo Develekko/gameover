@@ -7,10 +7,9 @@ import Register from '../Register/Register'
 import Notfound from '../Notfound/Notfound'
 import AllGames from '../AllGames/AllGames'
 import jwtDecode from 'jwt-decode'
-import Platforms from '../Platforms/Platforms'
-import Sortby from '../Sortby/Sortby'
 import GameDetails from '../GameDetails/GameDetails'
-import Categories from '../Categories/Categories'
+import {Provider} from 'react-redux'
+import store from '../../Redux/store'
 
 
 
@@ -48,11 +47,8 @@ export default function App() {
     {
       path: '', element: <Main userData={userData} logOut={logOut} />, children: [
         { path: '', element: <ProtectedRoute><Home /></ProtectedRoute> },
-        { path: 'all-games', element: <ProtectedRoute><AllGames /></ProtectedRoute> },
+        { path: '/:cat/:path', element: <ProtectedRoute><AllGames /></ProtectedRoute> },
         { path: 'game-details/:id', element: <ProtectedRoute><GameDetails /></ProtectedRoute> },
-        { path: 'platforms/:path', element: <ProtectedRoute><Platforms /></ProtectedRoute> },
-        { path: 'sort-by/:path', element: <ProtectedRoute><Sortby /></ProtectedRoute> },
-        { path: 'categories/:path', element: <ProtectedRoute><Categories /></ProtectedRoute> },
         { path: 'login', element: <Login saveUserData={saveUserData} /> },
         { path: 'register', element: <Register /> },
         { path: '*', element: <ProtectedRoute><Notfound /></ProtectedRoute> }
@@ -60,6 +56,9 @@ export default function App() {
     }
   ])
   return <>
-    <RouterProvider router={router} />
+  <Provider store={store}>
+  <RouterProvider router={router} />
+  </Provider>
+
   </>
 }

@@ -1,9 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Loading from '../Loading/Loading';
 import './Home.css'
+import {onTop} from '../../Redux/CounterSlice';
+import { useDispatch } from 'react-redux';
+
 export default function Home() {
+  let dispatch = useDispatch();
   const [allgames, setAllGames] = useState([]);
   let navigate = useNavigate()
   async function getGames() {
@@ -17,6 +22,7 @@ export default function Home() {
     setAllGames(data)
   }
   useEffect(() => {
+    dispatch(onTop())
     getGames()
   }, [])
   function getDetails(id) {

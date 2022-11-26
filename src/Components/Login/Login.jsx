@@ -69,7 +69,7 @@ export default function Login({saveUserData}) {
                                 <input onChange={getUSerData} name='email' id='email' type="text" placeholder='Email Address' className='form-control' />
                                 <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'email')[0]?.message}</small>
                             </div>
-                            <div className="mb-4"><input onChange={getUSerData} name='password' id='password' type="text" placeholder='Password' className='form-control' />
+                            <div className="mb-4"><input onChange={getUSerData} name='password' id='password' type="password" placeholder='Password' className='form-control' />
                                 <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'password')[0]?'Invalid Password : must be at least 8 characters':null}</small></div>
                             <button className='btn text-white p-2 w-100'>{isLoading ? <i className='fas fa-spinner fa-spin'></i> : 'Login'}</button>
                         </form>

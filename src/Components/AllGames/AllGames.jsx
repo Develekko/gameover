@@ -1,39 +1,31 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getGames } from '../../Redux/ApiSlice';
+import { increamnetByAmount ,resetCount,onTop} from '../../Redux/CounterSlice';
 import Loading from '../Loading/Loading';
 
 
 export default function AllGames() {
+    let { path, cat } = useParams();
+    let { allgames } = useSelector((state) => state.game)
+    let {counter} = useSelector((state) => state.counter)
+    let dispatch = useDispatch()
     let navigate = useNavigate()
-    const [allgames, setAllGames] = useState([]);
-    const [count, setCOunt] = useState(20);
-
-    async function getGames() {
-        let { data } = await axios.get(`https://free-to-play-games-database.p.rapidapi.com/api/games`, {
-            headers: {
-                'X-RapidAPI-Key': 'fc42eedff7msh1176cf883aee197p199b36jsn12e2a3062d67',
-                'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
-            }
-        })
-        setAllGames(data)
-    }
-    useEffect(() => {
-        getGames()
-    }, [])
-
-    function moreGames() {
-        let newCount = count;
-        newCount += 20
-        setCOunt(newCount);
-    }
     function getDetails(id) {
         navigate(`/game-details/${id}`)
     }
+    useEffect(() => {
+        dispatch(getGames({ path, cat }))
+        dispatch(resetCount())
+        dispatch(onTop())
+    }, [path, cat])
+
     return <>
         <div className="container text-center">
             <div className="row">
-                {allgames.length > 0 ? allgames.slice(0, count).map((game, index) =>
+                {allgames.length > 0 ? allgames.slice(0, counter).map((game, index) =>
                     <div key={index} className='col-sm-6 col-md-4 col-lg-3 mb-4'>
                         <div onClick={() => { getDetails(game.id) }} title={game.platform === "PC (Windows)" ? 'Avaliable on Windows' : 'Avaliable on Browser'} className='shadow game-card'>
                             <img className='w-100' src={game.thumbnail} loading="lazy" alt={game.title} />
@@ -55,7 +47,7 @@ export default function AllGames() {
                     </div>
                 ) : <Loading />}
             </div>
-            {count > allgames.length ? null : <button onClick={moreGames} className='btn btn-outline-secondary'>More Games</button>}
+            {counter > allgames.length ? null : <button  onClick={()=>dispatch(increamnetByAmount(20))} className='btn btn-outline-secondary'>More Games</button>}
         </div>
     </>
 }

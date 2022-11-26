@@ -89,7 +89,7 @@ export default function Register() {
                                 <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'age')[0]?.message}</small>
                             </div>
                             <div className="mb-4">
-                                <input onChange={getUSerData} name='password' id='password' type="text" placeholder='Password' className='form-control' />
+                                <input onChange={getUSerData} name='password' id='password' type="password" placeholder='Password' className='form-control' />
                                 <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'password')[0] ? 'Invalid Password : must be at least 8 characters' : null}</small>
                             </div>
                             <button className='btn text-white p-2 w-100'>{isLoading ? <i className='fas fa-spinner fa-spin'></i> : 'Create Account'}</button>

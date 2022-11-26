@@ -9,8 +9,12 @@ import 'swiper/css';
 import 'swiper/css/bundle'
 import './GameDetails.css'
 import Notfound from '../Notfound/Notfound';
+import {onTop} from '../../Redux/CounterSlice';
+import { useDispatch } from 'react-redux';
+
 
 export default function GameDetails() {
+  let dispatch = useDispatch()
   const [gameDetails, setGameDetails] = useState([]);
   const [idError, setIdError] = useState('');
   let { id } = useParams();
@@ -28,6 +32,7 @@ export default function GameDetails() {
     setGameDetails(data)
   }
   useEffect(() => {
+    dispatch(onTop())
     getGames()
   }, [])
   return <>
@@ -55,7 +60,7 @@ export default function GameDetails() {
               <li><span className='fw-bold'>Storage : </span>{gameDetails.minimum_system_requirements.storage}</li>
             </ul></>
             : null}
-          {gameDetails.screenshots ?
+          {gameDetails.screenshots.length>0 ?
             <><h3>{gameDetails.title} Screenshots</h3><Swiper
               effect={"creative"}
               spaceBetween={10}
