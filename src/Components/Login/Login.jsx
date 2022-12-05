@@ -19,7 +19,7 @@ export default function Login({saveUserData}) {
         setUser(User);
     }
     async function sendApiData() {
-        let { data } = await axios.post('https://route-egypt-api.herokuapp.com/signin', user);
+        let { data } = await axios.post('https://sticky-note-fe.vercel.app/signin', user);
         setisLoading(false)
         if (data.message === 'success') {
             localStorage.setItem('userToken',data.token);

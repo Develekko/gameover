@@ -24,7 +24,7 @@ export default function Register() {
         $(e.target).next().html('')
     }
     async function sendApiData() {
-        let { data } = await axios.post('https://route-egypt-api.herokuapp.com/signup', user);
+        let { data } = await axios.post('https://sticky-note-fe.vercel.app/signup', user);
         setisLoading(false)
         if (data.message === 'success') {
             navigate('/login')
