@@ -46,9 +46,9 @@ export default function App() {
   const router = createHashRouter([
     {
       path: '', element: <Main userData={userData} logOut={logOut} />, children: [
-        { path: '', element: <ProtectedRoute><Home /></ProtectedRoute> },
-        { path: '/:cat/:path', element: <ProtectedRoute><AllGames /></ProtectedRoute> },
-        { path: 'game-details/:id', element: <ProtectedRoute><GameDetails /></ProtectedRoute> },
+        { index:"true", element: <Home />},
+        { path: '/:cat/:path', element: <AllGames />},
+        { path: 'game-details/:id', element: <GameDetails /> },
         { path: 'login', element: <Login saveUserData={saveUserData} /> },
         { path: 'register', element: <Register /> },
         { path: '*', element: <ProtectedRoute><Notfound /></ProtectedRoute> }

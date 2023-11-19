@@ -19,7 +19,8 @@ export default function Login({saveUserData}) {
         setUser(User);
     }
     async function sendApiData() {
-        let { data } = await axios.post('https://sticky-note-fe.vercel.app/signin', user);
+        try {
+            let { data } = await axios.post('https://social-backend-api.vercel.app/auth/signin', user);
         setisLoading(false)
         if (data.message === 'success') {
             localStorage.setItem('userToken',data.token);
@@ -28,6 +29,10 @@ export default function Login({saveUserData}) {
         }
         else {
             setapiMessage(data.message)
+        }
+        } catch (error) {
+            setisLoading(false)
+            console.log(error);
         }
     }
     function submitForm(e) {

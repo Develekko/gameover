@@ -7,11 +7,11 @@ import $ from 'jquery'
 export default function Register() {
     const navigate = useNavigate()
     const [user, setUser] = useState({
-        first_name: '',
-        last_name: '',
+        name: '',
         age: 0,
         email: '',
-        password: ''
+        password: '',
+        confirmPassword:''
     })
     const [joiErrors, setJoiErrors] = useState([]);
     const [apiMessage, setapiMessage] = useState('');
@@ -20,11 +20,12 @@ export default function Register() {
     function getUSerData(e) {
         let User = { ...user };
         User[e.target.id] = e.target.value;
+        User.confirmPassword=User.password
         setUser(User);
         $(e.target).next().html('')
     }
     async function sendApiData() {
-        let { data } = await axios.post('https://sticky-note-fe.vercel.app/signup', user);
+        let { data } = await axios.post('https://social-backend-api.vercel.app/auth/signup', user);
         setisLoading(false)
         if (data.message === 'success') {
             navigate('/login')
@@ -37,11 +38,11 @@ export default function Register() {
         e.preventDefault();
         setisLoading(true)
         const schema = Joi.object({
-            first_name: Joi.string().min(3).max(20).required(),
-            last_name: Joi.string().min(3).max(20).required(),
+            name: Joi.string().min(3).max(20).required(),
             age: Joi.number().min(16).max(80).required(),
             email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
             password: Joi.string().required().pattern(/^\w{8,}$/),
+            confirmPassword: Joi.string()
         })
         const joiResponse = schema.validate(user, { abortEarly: false })
         if (joiResponse.error) {
@@ -71,13 +72,9 @@ export default function Register() {
                         <h4>Create My Account!</h4>
                         <form className='my-4' onSubmit={submitForm}>
                             <div className="row">
-                                <div className="col-md-6 mb-4">
-                                    <input onChange={getUSerData} name='first_name' id='first_name' type="text" placeholder='First Name' className='form-control ' />
-                                    <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'first_name')[0]?.message}</small>
-                                </div>
-                                <div className="col-md-6 mb-4">
-                                    <input onChange={getUSerData} name='last_name' id='last_name' type="text" placeholder='Last Name' className='form-control' />
-                                    <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'last_name')[0]?.message}</small>
+                                <div className="mb-4">
+                                    <input onChange={getUSerData} name='name' id='name' type="text" placeholder='Name' className='form-control ' />
+                                    <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'name')[0]?.message}</small>
                                 </div>
                             </div>
                             <div className="mb-4">
