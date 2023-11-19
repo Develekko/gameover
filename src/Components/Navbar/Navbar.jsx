@@ -58,7 +58,7 @@ export default function Navbar({ userData, logOut }) {
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             {userData ? <><li className="nav-item d-flex align-items-center ms-2">
-               Welcome <span className=' ms-2 username fw-bold'> {userData.first_name}</span>
+               Welcome <span className=' ms-2 username fw-bold'> {userData.name}</span>
             </li><li className="nav-item">
                 <span className="nav-link btn nav-button mx-2" onClick={logOut}>Log out</span>
               </li></> : <><li className="nav-item">

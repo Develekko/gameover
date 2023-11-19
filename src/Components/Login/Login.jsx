@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function Login({saveUserData}) {
     const navigate = useNavigate()
     const [user, setUser] = useState({
-        email: '',
-        password: ''
+        email: 'demo@gameover.com',
+        password: '12345678'
     })
     const [joiErrors, setJoiErrors] = useState([]);
     const [apiMessage, setapiMessage] = useState('');
@@ -22,17 +22,16 @@ export default function Login({saveUserData}) {
         try {
             let { data } = await axios.post('https://social-backend-api.vercel.app/auth/signin', user);
         setisLoading(false)
-        if (data.message === 'success') {
+        if (data.status === 'success') {
+  
+            setapiMessage(data?.message)
             localStorage.setItem('userToken',data.token);
             saveUserData()
             navigate('/')
         }
-        else {
-            setapiMessage(data.message)
-        }
         } catch (error) {
+            setapiMessage(error.response?.data?.message)
             setisLoading(false)
-            console.log(error);
         }
     }
     function submitForm(e) {
@@ -53,7 +52,7 @@ export default function Login({saveUserData}) {
         }
     }
     return <>
-        {apiMessage.length > 0 ? <div className="toast animate__animated animate__fadeInDown notification" role="alert" aria-live="assertive" aria-atomic="true">
+        {apiMessage?.length > 0 ? <div className="toast animate__animated animate__fadeInDown notification" role="alert" aria-live="assertive" aria-atomic="true">
             <div className="toast-body text-center notf-border position-relative ">
                 <span></span>
                 <span></span>
@@ -71,10 +70,10 @@ export default function Login({saveUserData}) {
                         <h4>Log in to GameOver</h4>
                         <form className='my-4' onSubmit={submitForm}>
                             <div className="mb-4">
-                                <input onChange={getUSerData} name='email' id='email' type="text" placeholder='Email Address' className='form-control' />
+                                <input onChange={getUSerData} value={user.email} name='email' id='email' type="text" placeholder='Email Address' className='form-control' />
                                 <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'email')[0]?.message}</small>
                             </div>
-                            <div className="mb-4"><input onChange={getUSerData} name='password' id='password' type="password" placeholder='Password' className='form-control' />
+                            <div className="mb-4"><input onChange={getUSerData} value={user.password} name='password' id='password' type="password" placeholder='Password' className='form-control' />
                                 <small className='text-danger error-form'>{joiErrors.filter((err) => err.context.label === 'password')[0]?'Invalid Password : must be at least 8 characters':null}</small></div>
                             <button className='btn text-white p-2 w-100'>{isLoading ? <i className='fas fa-spinner fa-spin'></i> : 'Login'}</button>
                         </form>

@@ -25,13 +25,15 @@ export default function Register() {
         $(e.target).next().html('')
     }
     async function sendApiData() {
-        let { data } = await axios.post('https://social-backend-api.vercel.app/auth/signup', user);
+        try {
+            let { data } = await axios.post('https://social-backend-api.vercel.app/auth/signup', user);
         setisLoading(false)
-        if (data.message === 'success') {
+        if (data.status === 'success') {
             navigate('/login')
         }
-        else {
-            setapiMessage(data.message)
+        } catch (error) {
+            setapiMessage(error.response?.data?.message)
+            setisLoading(false)
         }
     }
     function submitForm(e) {
@@ -55,7 +57,7 @@ export default function Register() {
     }
     return <>
 
-        {apiMessage.length > 0 ? <div className="toast animate__animated animate__fadeInDown notification" role="alert" aria-live="assertive" aria-atomic="true">
+        {apiMessage?.length > 0 ? <div className="toast animate__animated animate__fadeInDown notification" role="alert" aria-live="assertive" aria-atomic="true">
             <div className="toast-body text-center notf-border position-relative ">
                 <span></span>
                 <span></span>
